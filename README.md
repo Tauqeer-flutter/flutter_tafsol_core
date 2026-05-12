@@ -1,39 +1,61 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# flutter_tafsol_core
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+A Flutter package containing essential components and utilities to accelerate the creation of new applications. This core package provides responsive design utilities and customized UI widgets.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+### 1. Responsive Design Size (`getDesignSize`)
+Automatically determines the appropriate design size based on the device's screen width and orientation. It supports a wide range of devices from small foldables to large 4K desktops.
 
-## Getting started
+- **Dynamic Detection:** Automatically categorizes devices into `mobile`, `tablet`, `macBookAir`, `desktopLarge`, etc.
+- **Orientation Support:** Automatically swaps dimensions for mobile landscape to prevent layout stretching.
+- **Customizable:** Easily override default sizes for specific device types.
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+### 2. AppDropdown
+A highly customizable dropdown widget built on top of `dropdown_button2`. It simplifies the implementation of dropdowns with a consistent look and feel.
+
+- **Easy Integration:** Simple API for items and builders.
+- **Searchable:** Built-in support for searching through items using a `TextEditingController`.
+- **Form Validation:** Works seamlessly with Flutter's `Form` and `FormField` validation.
+- **Responsive:** Uses `flutter_screenutil` for consistent sizing across devices.
+
+## Getting Started
+
+Add the package to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  flutter_tafsol_core:
+    path: ../flutter_tafsol_core # or use git/pub version
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+### Responsive Design with ScreenUtil
 
 ```dart
-const like = 'sample';
+import 'package:flutter_tafsol_core/flutter_tafsol_core.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+void main() {
+  runApp(
+    ScreenUtilInit(
+      designSize: getDesignSize(context), // Automatic design size
+      builder: (context, child) => MyApp(),
+    ),
+  );
+}
 ```
 
-## Additional information
+### Using AppDropdown
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+AppDropdown<String>(
+  hint: 'Select a Category',
+  items: ['Technology', 'Business', 'Lifestyle'],
+  builder: (item) => Text(item),
+  onChanged: (value) {
+    print('Selected: $value');
+  },
+)
+```
