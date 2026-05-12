@@ -1,3 +1,7 @@
+## 0.0.4
+
+* Add example project and fix AppDropDown initial value issue
+
 ## 0.0.3
 
 * Fix initial value issue in AppDropDown
