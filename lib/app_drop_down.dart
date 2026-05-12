@@ -18,7 +18,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 ///   onChanged: (value) => print('Selected: $value'),
 /// )
 /// ```
-class AppDropdown<T> extends StatelessWidget {
+class AppDropdown<T> extends StatefulWidget {
   /// The currently selected value.
   final T? value;
 
@@ -68,20 +68,44 @@ class AppDropdown<T> extends StatelessWidget {
   });
 
   @override
+  State<AppDropdown<T>> createState() => _AppDropdownState<T>();
+}
+
+class _AppDropdownState<T> extends State<AppDropdown<T>> {
+  final _selectedItemNotifier = ValueNotifier<T?>(null);
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _selectedItemNotifier.value = widget.value;
+    });
+  }
+
+  @override
+  void dispose() {
+    _selectedItemNotifier.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final inputDecoration = InputDecorationTheme.of(context);
     return SizedBox(
       // height: 43.sp,
-      width: width,
+      width: widget.width,
       child: DropdownButtonFormField2<T>(
-        key: ValueKey(items.length),
+        key: ValueKey(widget.items.length),
+        valueListenable: _selectedItemNotifier,
         // style: AppFonts.black14w400,
+        style: inputDecoration.hintStyle,
         decoration: InputDecoration(
           constraints: BoxConstraints(maxWidth: 200.w, minWidth: 100.w),
-          hintText: hint,
+          hintText: widget.hint,
           // hintStyle: AppFonts.black14w400,
+          hintStyle: inputDecoration.hintStyle,
           filled: true,
-          fillColor: fillColor ?? Colors.white,
+          fillColor: widget.fillColor ?? Colors.white,
           // border: OutlineInputBorder(
           //   borderSide: const BorderSide(color: AppColors.lightGrey2),
           //   borderRadius: BorderRadius.circular(12.r),
@@ -110,15 +134,19 @@ class AppDropdown<T> extends StatelessWidget {
           contentPadding: EdgeInsets.symmetric(vertical: 11.sp),
         ),
         isExpanded: true,
-        hint: Text(hint),
-        items: items
-            .map((item) => DropdownItem<T>(value: item, child: builder(item)))
+        hint: Text(widget.hint),
+        items: widget.items
+            .map(
+              (item) =>
+                  DropdownItem<T>(value: item, child: widget.builder(item)),
+            )
             .toList(),
-        onChanged: onChanged,
-        validator: validator,
-        buttonStyleData: FormFieldButtonStyleData(
-          padding: EdgeInsets.only(right: 10.w),
-        ),
+        onChanged: (newItem) {
+          _selectedItemNotifier.value = newItem;
+          widget.onChanged?.call(newItem);
+        },
+        validator: widget.validator,
+        buttonStyleData: FormFieldButtonStyleData(padding: EdgeInsets.zero),
         iconStyleData: IconStyleData(
           icon: const Icon(CupertinoIcons.chevron_down),
           iconSize: 16.sp,
@@ -134,9 +162,9 @@ class AppDropdown<T> extends StatelessWidget {
         menuItemStyleData: MenuItemStyleData(
           padding: EdgeInsets.symmetric(horizontal: 12.w),
         ),
-        dropdownSearchData: searchController != null
+        dropdownSearchData: widget.searchController != null
             ? DropdownSearchData(
-                searchController: searchController,
+                searchController: widget.searchController,
                 searchBarWidgetHeight: 50.h,
                 searchBarWidget: Container(
                   height: 50.h,
@@ -149,7 +177,7 @@ class AppDropdown<T> extends StatelessWidget {
                   child: TextFormField(
                     expands: true,
                     maxLines: null,
-                    controller: searchController,
+                    controller: widget.searchController,
                     decoration: InputDecoration(
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(
@@ -163,12 +191,12 @@ class AppDropdown<T> extends StatelessWidget {
                     ),
                   ),
                 ),
-                searchMatchFn: searchMatchFn,
+                searchMatchFn: widget.searchMatchFn,
               )
             : null,
         onMenuStateChange: (isOpen) {
           if (!isOpen) {
-            searchController?.clear();
+            widget.searchController?.clear();
           }
         },
       ),
