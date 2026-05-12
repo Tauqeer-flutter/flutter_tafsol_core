@@ -69,43 +69,46 @@ class AppDropdown<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final inputDecoration = InputDecorationTheme.of(context);
     return SizedBox(
       // height: 43.sp,
       width: width,
       child: DropdownButtonFormField2<T>(
         key: ValueKey(items.length),
         // style: AppFonts.black14w400,
-        // decoration: InputDecoration(
-        //   constraints: BoxConstraints(maxWidth: 200.w, minWidth: 100.w),
-        //   hintText: hint,
-        //   hintStyle: AppFonts.black14w400,
-        //   filled: true,
-        //   fillColor: fillColor ?? Colors.white,
-        //   border: OutlineInputBorder(
-        //     borderSide: const BorderSide(color: AppColors.lightGrey2),
-        //     borderRadius: BorderRadius.circular(12.r),
-        //   ),
-        //   enabledBorder: OutlineInputBorder(
-        //     borderSide: const BorderSide(color: AppColors.lightGrey2),
-        //     borderRadius: BorderRadius.circular(12.r),
-        //   ),
-        //   focusedBorder: OutlineInputBorder(
-        //     borderSide: const BorderSide(color: AppColors.lightGrey2),
-        //     borderRadius: BorderRadius.circular(12.r),
-        //   ),
-        //   errorBorder: OutlineInputBorder(
-        //     borderSide: const BorderSide(color: Colors.red),
-        //     borderRadius: BorderRadius.circular(12.r),
-        //   ),
-        //   focusedErrorBorder: OutlineInputBorder(
-        //     borderSide: const BorderSide(color: Colors.red),
-        //     borderRadius: BorderRadius.circular(12.r),
-        //   ),
-        //   contentPadding: EdgeInsets.symmetric(
-        //     // horizontal: 16.w,
-        //     vertical: 11.sp,
-        //   ),
-        // ),
+        decoration: InputDecoration(
+          constraints: BoxConstraints(maxWidth: 200.w, minWidth: 100.w),
+          hintText: hint,
+          // hintStyle: AppFonts.black14w400,
+          filled: true,
+          fillColor: fillColor ?? Colors.white,
+          // border: OutlineInputBorder(
+          //   borderSide: const BorderSide(color: AppColors.lightGrey2),
+          //   borderRadius: BorderRadius.circular(12.r),
+          // ),
+          border: inputDecoration.border,
+          // enabledBorder: OutlineInputBorder(
+          //   borderSide: const BorderSide(color: AppColors.lightGrey2),
+          //   borderRadius: BorderRadius.circular(12.r),
+          // ),
+          enabledBorder: inputDecoration.enabledBorder,
+          // focusedBorder: OutlineInputBorder(
+          //   borderSide: const BorderSide(color: AppColors.lightGrey2),
+          //   borderRadius: BorderRadius.circular(12.r),
+          // ),
+          focusedBorder: inputDecoration.focusedBorder,
+          // errorBorder: OutlineInputBorder(
+          //   borderSide: const BorderSide(color: Colors.red),
+          //   borderRadius: BorderRadius.circular(12.r),
+          // ),
+          errorBorder: inputDecoration.errorBorder,
+          // focusedErrorBorder: OutlineInputBorder(
+          //   borderSide: const BorderSide(color: Colors.red),
+          //   borderRadius: BorderRadius.circular(12.r),
+          // ),
+          focusedErrorBorder: inputDecoration.focusedErrorBorder,
+          contentPadding: EdgeInsets.symmetric(vertical: 11.sp),
+        ),
         isExpanded: true,
         hint: Text(hint),
         items: items
