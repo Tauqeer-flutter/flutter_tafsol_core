@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart' hide DeviceType;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_tafsol_core/flutter_tafsol_core.dart';
 
 void main() {
@@ -15,20 +15,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // We use ScreenUtilInit to initialize responsive sizing.
     // getDesignSize automatically picks the best design size based on the device.
-    return ScreenUtilInit(
-      designSize: getDesignSize(
-        context,
-        customSizes: {DeviceType.mobile: Size(390, 844)},
+    return ScreenUtil(
+      options: ScreenUtilOptions(
+        designSize: getDesignSize(
+          context,
+          customSizes: {DeviceType.mobile: Size(390, 844)},
+        ),
       ),
-      minTextAdapt: true,
-      splitScreenMode: true,
-      builder: (context, child) {
-        return MaterialApp(
-          title: 'Tafsol Core Example',
-          theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
-          home: const HomePage(),
-        );
-      },
+      child: MaterialApp(
+        title: 'Tafsol Core Example',
+        theme: ThemeData(primarySwatch: Colors.blue, useMaterial3: true),
+        home: const HomePage(),
+      ),
     );
   }
 }
@@ -68,15 +66,18 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(title: const Text('Tafsol Core Example')),
       body: Padding(
-        padding: EdgeInsets.all(20.w),
+        padding: EdgeInsets.all(context.w(20)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Basic Dropdown:',
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontSize: context.sp(16),
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: context.h(10)),
             AppDropdown<String>(
               hint: 'Select a Country',
               items: _countries,
@@ -87,13 +88,16 @@ class _HomePageState extends State<HomePage> {
                 });
               },
             ),
-            SizedBox(height: 30.h),
+            SizedBox(height: context.h(30)),
 
             Text(
               'Dropdown with Search:',
-              style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                fontSize: context.sp(16),
+                fontWeight: FontWeight.w600,
+              ),
             ),
-            SizedBox(height: 10.h),
+            SizedBox(height: context.h(10)),
             AppDropdown<String>(
               hint: 'Search Country',
               items: _countries,
@@ -112,10 +116,10 @@ class _HomePageState extends State<HomePage> {
             Center(
               child: Text(
                 'Selected: ${_selectedCountry ?? "None"}',
-                style: TextStyle(fontSize: 16.sp, color: Colors.blue),
+                style: TextStyle(fontSize: context.sp(16), color: Colors.blue),
               ),
             ),
-            SizedBox(height: 20.h),
+            SizedBox(height: context.h(20)),
           ],
         ),
       ),

@@ -92,46 +92,26 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
   Widget build(BuildContext context) {
     final inputDecoration = InputDecorationTheme.of(context);
     return SizedBox(
-      // height: 43.sp,
       width: widget.width,
       child: DropdownButtonFormField2<T>(
         key: ValueKey(widget.items.length),
         valueListenable: _selectedItemNotifier,
-        // style: AppFonts.black14w400,
         style: inputDecoration.hintStyle,
         decoration: InputDecoration(
-          constraints: BoxConstraints(maxWidth: 200.w, minWidth: 100.w),
+          constraints: BoxConstraints(
+            maxWidth: context.w(200),
+            minWidth: context.w(100),
+          ),
           hintText: widget.hint,
-          // hintStyle: AppFonts.black14w400,
           hintStyle: inputDecoration.hintStyle,
           filled: true,
           fillColor: widget.fillColor ?? Colors.white,
-          // border: OutlineInputBorder(
-          //   borderSide: const BorderSide(color: AppColors.lightGrey2),
-          //   borderRadius: BorderRadius.circular(12.r),
-          // ),
           border: inputDecoration.border,
-          // enabledBorder: OutlineInputBorder(
-          //   borderSide: const BorderSide(color: AppColors.lightGrey2),
-          //   borderRadius: BorderRadius.circular(12.r),
-          // ),
           enabledBorder: inputDecoration.enabledBorder,
-          // focusedBorder: OutlineInputBorder(
-          //   borderSide: const BorderSide(color: AppColors.lightGrey2),
-          //   borderRadius: BorderRadius.circular(12.r),
-          // ),
           focusedBorder: inputDecoration.focusedBorder,
-          // errorBorder: OutlineInputBorder(
-          //   borderSide: const BorderSide(color: Colors.red),
-          //   borderRadius: BorderRadius.circular(12.r),
-          // ),
           errorBorder: inputDecoration.errorBorder,
-          // focusedErrorBorder: OutlineInputBorder(
-          //   borderSide: const BorderSide(color: Colors.red),
-          //   borderRadius: BorderRadius.circular(12.r),
-          // ),
           focusedErrorBorder: inputDecoration.focusedErrorBorder,
-          contentPadding: EdgeInsets.symmetric(vertical: 11.sp),
+          contentPadding: EdgeInsets.symmetric(vertical: context.sp(11)),
         ),
         isExpanded: true,
         hint: Text(widget.hint),
@@ -149,30 +129,30 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
         buttonStyleData: FormFieldButtonStyleData(padding: EdgeInsets.zero),
         iconStyleData: IconStyleData(
           icon: const Icon(CupertinoIcons.chevron_down),
-          iconSize: 16.sp,
+          iconSize: context.sp(16),
         ),
         dropdownStyleData: DropdownStyleData(
-          maxHeight: 300.h,
+          maxHeight: context.h(300),
           offset: const Offset(0, -10),
           decoration: BoxDecoration(
             color: Colors.white,
-            borderRadius: BorderRadius.circular(12.r),
+            borderRadius: BorderRadius.circular(context.r(12)),
           ),
         ),
         menuItemStyleData: MenuItemStyleData(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
+          padding: EdgeInsets.symmetric(horizontal: context.w(12)),
         ),
         dropdownSearchData: widget.searchController != null
             ? DropdownSearchData(
                 searchController: widget.searchController,
-                searchBarWidgetHeight: 50.h,
+                searchBarWidgetHeight: context.h(50),
                 searchBarWidget: Container(
-                  height: 50.h,
+                  height: context.h(50),
                   padding: EdgeInsets.only(
-                    top: 8.h,
-                    bottom: 4.h,
-                    right: 8.w,
-                    left: 8.w,
+                    top: context.h(8),
+                    bottom: context.h(4),
+                    right: context.w(8),
+                    left: context.w(8),
                   ),
                   child: TextFormField(
                     expands: true,
@@ -181,12 +161,12 @@ class _AppDropdownState<T> extends State<AppDropdown<T>> {
                     decoration: InputDecoration(
                       isDense: true,
                       contentPadding: EdgeInsets.symmetric(
-                        horizontal: 10.w,
-                        vertical: 8.h,
+                        horizontal: context.w(10),
+                        vertical: context.h(8),
                       ),
                       hintText: 'Search...',
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.r),
+                        borderRadius: BorderRadius.circular(context.r(8)),
                       ),
                     ),
                   ),

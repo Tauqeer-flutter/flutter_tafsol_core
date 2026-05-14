@@ -9,9 +9,9 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ScreenUtilInit(
-              designSize: const Size(390, 844),
-              builder: (context, child) => AppDropdown<String>(
+            body: ScreenUtil(
+              options: ScreenUtilOptions(designSize: const Size(390, 844)),
+              child: AppDropdown<String>(
                 hint: 'Select Option',
                 items: const ['A', 'B'],
                 builder: (item) => Text(item),
@@ -30,9 +30,9 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ScreenUtilInit(
-              designSize: const Size(390, 844),
-              builder: (context, child) => AppDropdown<String>(
+            body: ScreenUtil(
+              options: ScreenUtilOptions(designSize: const Size(390, 844)),
+              child: AppDropdown<String>(
                 hint: 'Select',
                 items: const ['Option 1', 'Option 2'],
                 builder: (item) => Text(item),
@@ -60,9 +60,9 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           home: Scaffold(
-            body: ScreenUtilInit(
-              designSize: const Size(390, 844),
-              builder: (context, child) => Form(
+            body: ScreenUtil(
+              options: ScreenUtilOptions(designSize: const Size(390, 844)),
+              child: Form(
                 key: formKey,
                 child: Column(
                   children: [

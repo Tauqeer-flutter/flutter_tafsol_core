@@ -1,3 +1,8 @@
+## 0.0.5
+
+* Update flutter_screenutil dependency to 6.0.0-alpha.1
+
+
 ## 0.0.4
 
 * Add example project and fix AppDropDown initial value issue
